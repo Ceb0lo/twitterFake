@@ -11,35 +11,41 @@ export const Post = styled.div`
   gap: 12px;
   font-size: 15px;
 `
-export const PostContent = styled.form`
+export const PostContent = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-`
-export const PostHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
 `
 export const ProfilePicture = styled.img`
   height: 40px;
   width: 40px;
   border-radius: 50%;
 `
-export const Username = styled.h1`
-  font-weight: 400;
+export const Text = styled.textarea`
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  font-size: 20px;
+  background: transparent;
+
+  textarea::placeholder {
+    color: ${variables.white};
+  }
 `
-export const Text = styled.h2`
-  margin-top: 2px;
-  font-size: 15px;
-  line-height: 20px;
+export const PostButton = styled.button`
+  background: ${variables.white};
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: bold;
+  color: ${variables.black};
+  cursor: pointer;
 `
 export const PostFooter = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-top: 8px;
-  span {
-    margin-left: 8px;
-  }
 `
