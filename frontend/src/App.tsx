@@ -1,7 +1,13 @@
+import Post from './components/Post'
+import PostSubmit from './components/PostSubmit'
+import EstiloGlobal from './styles'
+
 function App() {
   return (
     <>
-      <h1>Ola</h1>
+      <EstiloGlobal />
+      <PostSubmit />
+      <Post />
     </>
   )
 }
