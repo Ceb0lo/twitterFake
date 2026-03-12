@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+
 import variables from './variables'
 
 const EstiloGlobal = createGlobalStyle`
