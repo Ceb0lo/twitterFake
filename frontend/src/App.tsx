@@ -1,13 +1,11 @@
-import Post from './components/Post'
-import PostSubmit from './components/PostSubmit'
+import Home from './pages/Home'
 import EstiloGlobal from './styles'
 
 function App() {
   return (
     <>
       <EstiloGlobal />
-      <PostSubmit />
-      <Post />
+      <Home />
     </>
   )
 }
