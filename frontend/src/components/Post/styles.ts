@@ -9,7 +9,7 @@ export const Post = styled.div`
   display: flex;
   padding: 12px 16px;
   gap: 12px;
-  font-size: 15px;
+  font-size: 16px;
 `
 export const PostContent = styled.form`
   display: flex;
@@ -29,9 +29,9 @@ export const ProfilePicture = styled.img`
 export const Username = styled.h1`
   font-weight: 400;
 `
-export const Text = styled.h2`
+export const Text = styled.p`
   margin-top: 2px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 20px;
 `
 export const PostFooter = styled.div`

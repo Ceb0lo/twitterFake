@@ -1,12 +1,13 @@
-import Home from './pages/Home'
-import EstiloGlobal from './styles'
+import { BrowserRouter } from 'react-router-dom'
+import GlobalStyle from './styles'
+import Rotas from './routes'
 
 function App() {
   return (
-    <>
-      <EstiloGlobal />
-      <Home />
-    </>
+    <BrowserRouter>
+      <GlobalStyle />
+      <Rotas />
+    </BrowserRouter>
   )
 }
 
