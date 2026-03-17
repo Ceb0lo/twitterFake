@@ -1,23 +1,29 @@
 import * as S from './styles'
 
-const Bio = () => {
+type Props = {
+  id: string
+  username: string
+  foto: string | null
+  bio: string | null
+  followers: number
+  following: number
+}
+
+const Bio = ({ id, username, foto, followers, following }: Props) => {
   return (
-    <S.Container>
+    <S.Container key={id}>
       <S.BioHeder>
-        <S.BioPicture src="https://via.placeholder.com/133" />
+        <S.BioPicture src={foto || 'https://i.pravatar.cc/150'} />
         <S.Icon>Editar Perfil</S.Icon>
       </S.BioHeder>
-
       <S.BioContent>
-        <S.Username>@teste</S.Username>
-
+        <S.Username>{username}</S.Username>
         <S.BioFooter>
           <S.SocialNetwork>
-            <span>120</span> Seguindo
+            <span>{following}</span> Seguindo
           </S.SocialNetwork>
-
           <S.SocialNetwork>
-            <span>300</span> Seguidores
+            <span>{followers}</span> Seguidores
           </S.SocialNetwork>
         </S.BioFooter>
       </S.BioContent>
