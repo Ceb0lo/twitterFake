@@ -17,15 +17,25 @@ interface PostType {
 const Home = () => {
   const [posts, setPosts] = useState<PostType[]>([])
 
+  const loadPosts = async () => {
+    const token = localStorage.getItem('token')
+
+    const response = await fetch('http://127.0.0.1:8000/api/posts/feed/', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    const data = await response.json()
+    setPosts(data)
+  }
+
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/posts/')
-      .then((res) => res.json())
-      .then((data) => setPosts(data))
-      .catch((err) => console.error('Erro ao carregar API:', err))
+    loadPosts()
   }, [])
 
-  if (posts.length === 0) {
-    return <h3>Carregando...</h3>
+  const addPostToFeed = (newPost: PostType) => {
+    setPosts((prev) => [newPost, ...prev])
   }
 
   return (
@@ -35,7 +45,7 @@ const Home = () => {
       </S.Left>
 
       <S.Center>
-        <PostSubmit />
+        <PostSubmit onPostCreated={addPostToFeed} />
 
         {posts.map((post) => (
           <Post

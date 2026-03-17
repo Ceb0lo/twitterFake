@@ -5,12 +5,30 @@ import Profile from './pages/Profile'
 import CreateAccount from './pages/CreateAccount'
 import Login from './pages/Login'
 
+import ProtectedRoute from './components/ProtectedRoute'
+
 const Rotas = () => (
   <Routes>
     <Route path='/' element={<Login />} />
-    <Route path='/home' element={<Home />} />
-    <Route path="/profile/:username" element={<Profile />} />
     <Route path='/create-account' element={<CreateAccount />} />
+
+    <Route
+      path='/home'
+      element={
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      }
+    />
+
+    <Route
+      path='/profile/:username'
+      element={
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      }
+    />
   </Routes>
 )
 

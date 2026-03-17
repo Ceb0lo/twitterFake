@@ -1,23 +1,27 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface Post {
-  id: number
-  user: string
-  text: string
-  created_at: string
-}
-
-const api = createApi({
+export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://127.0.0.1:8000/api/'
   }),
   endpoints: (builder) => ({
-    getPosts: builder.query<Post[], void>({
-      query: () => 'posts/'
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: 'auth/login/',
+        method: 'POST',
+        body: credentials
+      })
+    }),
+
+    register: builder.mutation({
+      query: (body) => ({
+        url: 'users/register/',
+        method: 'POST',
+        body
+      })
     })
   })
 })
 
-export const { useGetPostsQuery } = api
-export default api
+export const { useLoginMutation, useRegisterMutation } = api

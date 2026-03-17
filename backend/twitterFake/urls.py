@@ -30,11 +30,11 @@ router = DefaultRouter()
 router.register(r"posts", PostViewSet)
 router.register(r"comments", CommentViewSet)
 router.register(r"likes", LikeViewSet)
-router.register(r"follows", FollowViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/users/", include("users.urls")),
+    path("api/social/", include("social.urls")),
     path("api/auth/login/", TokenObtainPairView.as_view(), name="login"),
     path("api/auth/refresh/", TokenRefreshView.as_view(), name="refresh"),
     path("api/", include(router.urls)),

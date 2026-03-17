@@ -55,3 +55,25 @@ def user_following(request, username):
     serializer = UserProfileSerializer(users, many=True)
 
     return Response(serializer.data)
+
+
+@api_view(["POST"])
+def login(request):
+    email = request.data.get("email")
+    password = request.data.get("password")
+
+@api_view(["POST"])
+def register(request):
+    username = request.data.get("username")
+    email = request.data.get("email")
+    password = request.data.get("password")
+
+    user = User.objects.create_user(
+        username=username,
+        email=email,
+        password=password
+    )
+
+    return Response({
+        "message": "Usuário criado com sucesso"
+    })
