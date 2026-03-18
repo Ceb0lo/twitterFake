@@ -1,6 +1,7 @@
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.generics import RetrieveAPIView
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
 
 from .models import User
 from .serializers import UserProfileSerializer
@@ -11,13 +12,15 @@ from posts.serializers import PostSerializer
 from social.models import Follow
 
 
-@api_view(["GET"])
-def user_profile(request, username):
-    user = get_object_or_404(User, username=username)
+class UserDetailView(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserProfileSerializer
+    lookup_field = "username"
 
-    serializer = UserProfileSerializer(user)
-
-    return Response(serializer.data)
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["request"] = self.request
+        return context
 
 
 @api_view(["GET"])
@@ -62,18 +65,13 @@ def login(request):
     email = request.data.get("email")
     password = request.data.get("password")
 
+
 @api_view(["POST"])
 def register(request):
     username = request.data.get("username")
     email = request.data.get("email")
     password = request.data.get("password")
 
-    user = User.objects.create_user(
-        username=username,
-        email=email,
-        password=password
-    )
+    user = User.objects.create_user(username=username, email=email, password=password)
 
-    return Response({
-        "message": "Usuário criado com sucesso"
-    })
+    return Response({"message": "Usuário criado com sucesso"})

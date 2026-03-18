@@ -11,7 +11,9 @@ interface PostType {
   id: number
   user: string
   text: string
-  created_at: string
+  likes_count: number
+  comments_count: number
+  is_liked: boolean
 }
 
 const Home = () => {
@@ -20,14 +22,23 @@ const Home = () => {
   const loadPosts = async () => {
     const token = localStorage.getItem('token')
 
-    const response = await fetch('http://127.0.0.1:8000/api/posts/feed/', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    if (!token) {
+      console.error('Usuário não autenticado')
+      return
+    }
 
-    const data = await response.json()
-    setPosts(data)
+    try {
+      const res = await fetch('http://127.0.0.1:8000/api/posts/feed/', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      const data = await res.json()
+      setPosts(data)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   useEffect(() => {
@@ -47,15 +58,18 @@ const Home = () => {
       <S.Center>
         <PostSubmit onPostCreated={addPostToFeed} />
 
-        {posts.map((post) => (
-          <Post
-            key={post.id}
-            id={post.id}
-            user={post.user}
-            text={post.text}
-            created_at={post.created_at}
-          />
-        ))}
+        {Array.isArray(posts) &&
+          posts.map((post) => (
+            <Post
+              key={post.id}
+              id={post.id}
+              user={post.user}
+              text={post.text}
+              likes_count={post.likes_count}
+              comments_count={post.comments_count}
+              is_liked={post.is_liked}
+            />
+          ))}
       </S.Center>
 
       <S.Right>

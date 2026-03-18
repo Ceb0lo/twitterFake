@@ -1,10 +1,12 @@
 from rest_framework import serializers
 from .models import User
+from social.models import Follow
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     followers = serializers.SerializerMethodField()
     following = serializers.SerializerMethodField()
+    is_following = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -15,6 +17,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "bio",
             "followers",
             "following",
+            'is_following'
         ]
 
     def get_followers(self, obj):
@@ -22,3 +25,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     def get_following(self, obj):
         return obj.following.count()
+
+    def get_is_following(self, obj):
+        request = self.context.get('request')
+
+        if not request or not request.user.is_authenticated:
+            return False
+
+        return Follow.objects.filter(
+            follower=request.user,
+            following=obj
+        ).exists()

@@ -43,3 +43,32 @@ export const PostFooter = styled.div`
     margin-left: 8px;
   }
 `
+export const TextComments = styled.input`
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  font-size: 20px;
+  background: transparent;
+
+  input::placeholder {
+    color: ${variables.white};
+  }
+`
+export const PostButton = styled.button`
+  background: ${variables.white};
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: bold;
+  color: ${variables.black};
+  cursor: pointer;
+`
+export const CommentsContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+`

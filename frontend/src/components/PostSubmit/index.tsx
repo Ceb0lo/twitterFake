@@ -38,7 +38,6 @@ const PostSubmit = ({ onPostCreated }: PostSubmitProps) => {
 
       const data = await response.json()
 
-      // adiciona imediatamente no feed
       onPostCreated(data)
 
       setText('')
