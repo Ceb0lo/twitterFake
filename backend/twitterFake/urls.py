@@ -23,6 +23,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from posts.views import PostViewSet
 from social.views import CommentViewSet, LikeViewSet, FollowViewSet
 
@@ -35,7 +38,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/users/", include("users.urls")),
     path("api/social/", include("social.urls")),
+    path('api/', include('social.urls')),
     path("api/auth/login/", TokenObtainPairView.as_view(), name="login"),
     path("api/auth/refresh/", TokenRefreshView.as_view(), name="refresh"),
     path("api/", include(router.urls)),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

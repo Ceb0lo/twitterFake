@@ -11,6 +11,7 @@ interface PostType {
   id: number
   user: string
   text: string
+  foto: string | null
   likes_count: number
   comments_count: number
   is_liked: boolean
@@ -68,6 +69,7 @@ const Home = () => {
               likes_count={post.likes_count}
               comments_count={post.comments_count}
               is_liked={post.is_liked}
+              foto={post.foto}
             />
           ))}
       </S.Center>

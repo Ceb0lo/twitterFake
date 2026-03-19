@@ -6,6 +6,7 @@ import * as S from './styles'
 type Props = {
   id: number
   user: string
+  foto: string | null
   text: string
   likes_count: number
   comments_count: number
@@ -23,6 +24,7 @@ const Post = ({
   id,
   user,
   text,
+  foto,
   likes_count,
   comments_count,
   is_liked
@@ -123,7 +125,7 @@ const Post = ({
 
   return (
     <S.Post key={id}>
-      <S.ProfilePicture />
+      <S.ProfilePicture src={foto || 'https://i.pravatar.cc/150'} />
 
       <S.PostContent>
         <S.PostHeader>

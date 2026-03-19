@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import * as S from './styles'
 
 type Props = {
@@ -24,13 +26,16 @@ const Bio = ({
   isFollowing,
   onFollow
 }: Props) => {
+  const navigate = useNavigate()
   return (
     <S.Container key={id}>
       <S.BioHeder>
         <S.BioPicture src={foto || 'https://i.pravatar.cc/150'} />
 
         {isOwnProfile ? (
-          <S.Icon>Editar Perfil</S.Icon>
+          <S.Icon onClick={() => navigate(`/edit-profile/${username}`)}>
+            Editar Perfil
+          </S.Icon>
         ) : (
           <S.Icon onClick={onFollow}>
             {isFollowing ? 'Seguindo' : 'Seguir'}

@@ -6,12 +6,13 @@ import CreateAccount from './pages/CreateAccount'
 import Login from './pages/Login'
 
 import ProtectedRoute from './components/ProtectedRoute'
+import EditProfile from './pages/EditProfile'
 
 const Rotas = () => (
   <Routes>
     <Route path='/' element={<Login />} />
     <Route path='/create-account' element={<CreateAccount />} />
-
+    <Route path="/edit-profile/:id" element={<EditProfile />} />
     <Route
       path='/home'
       element={

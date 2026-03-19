@@ -4,10 +4,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
-
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 
 from users.models import User
+from posts.models import Post
 from .models import Comment, Like, Follow
 from .serializers import CommentSerializer, LikeSerializer, FollowSerializer
 
@@ -132,3 +133,43 @@ def toggle_follow(request):
         return Response({"following": False})
 
     return Response({"following": True})
+
+@api_view(['GET'])
+def search(request):
+    query = request.GET.get('q', '')
+    user = request.user 
+    if not query:
+        return Response([])
+
+    # 🔎 Buscar usuários
+    users = User.objects.filter(
+        Q(username__icontains=query) | Q(bio__icontains=query)
+    )[:5]
+
+    # 🔎 Buscar posts
+    posts = Post.objects.filter(
+        Q(text__icontains=query)
+    ).select_related('user').prefetch_related('likes')[:5]
+
+    results = []
+
+    for user_obj in users:
+        results.append({
+            'id': user_obj.id,
+            'type': 'user',
+            'username': user_obj.username,
+            'bio': user_obj.bio,
+            'is_following': False
+        })
+
+    for post in posts:
+        results.append({
+            'id': post.id,
+            'type': 'post',
+            'user': post.user.username,
+            'text': post.text,
+            'created_at': post.created_at,
+            'is_liked': False
+        })
+
+    return Response(results)

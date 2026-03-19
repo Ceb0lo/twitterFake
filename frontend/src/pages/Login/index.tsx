@@ -17,21 +17,22 @@ const Login = () => {
 
   const [login] = useLoginMutation()
 
-const handleLogin = async () => {
-  try {
-    setError('')
+  const handleLogin = async () => {
+    try {
+      setError('')
 
-    const response = await login({
-      username: email,
-      password
-    }).unwrap()
+      const response = await login({
+        username: email,
+        password
+      }).unwrap()
 
-    const token = response.access
+      const token = response.access
 
-    localStorage.setItem('token', token)
+      localStorage.setItem('token', token)
+      localStorage.setItem('username', response.data?.email || response.username || email)
 
-    navigate('/home')
-  } catch (err) {
+      navigate('/home')
+    } catch (err) {
       setError('User ou senha inválidos')
     }
   }

@@ -20,8 +20,25 @@ export const api = createApi({
         method: 'POST',
         body
       })
+    }),
+
+    search: builder.query({
+      query: (q: string) => `search/?q=${q}`
+    }),
+
+    editProfile: builder.mutation({
+      query: ({ username, data }: { username: string; data: any }) => ({
+        url: `/users/${username}/`,
+        method: 'PATCH',
+        body: data
+      })
     })
   })
 })
 
-export const { useLoginMutation, useRegisterMutation } = api
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useSearchQuery,
+  useEditProfileMutation
+} = api

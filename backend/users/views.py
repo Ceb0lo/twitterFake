@@ -12,7 +12,10 @@ from posts.serializers import PostSerializer
 from social.models import Follow
 
 
-class UserDetailView(RetrieveAPIView):
+from rest_framework.generics import RetrieveUpdateAPIView
+
+
+class UserDetailView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
     lookup_field = "username"
@@ -25,13 +28,14 @@ class UserDetailView(RetrieveAPIView):
 
 @api_view(["GET"])
 def user_posts(request, username):
-    user = get_object_or_404(User, username=username)
+    try:
+        user = User.objects.get(username=username)
+        posts = Post.objects.filter(user=user).order_by("-created_at")
 
-    posts = Post.objects.filter(user=user).order_by("-created_at")
-
-    serializer = PostSerializer(posts, many=True)
-
-    return Response(serializer.data)
+        serializer = PostSerializer(posts, many=True, context={"request": request})
+        return Response(serializer.data)
+    except User.DoesNotExist:
+        return Response({"error": "Usuário não encontrado"}, status=404)
 
 
 @api_view(["GET"])
