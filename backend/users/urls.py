@@ -4,8 +4,11 @@ from .views import UserDetailView
 
 urlpatterns = [
     path("register/", views.register),
-    path("<str:username>/", UserDetailView.as_view()),
+
+    # 🔎 rotas mais específicas
     path("<str:username>/posts/", views.user_posts),
     path("<str:username>/followers/", views.user_followers),
     path("<str:username>/following/", views.user_following),
+
+    path("<str:username>/", UserDetailView.as_view()),
 ]

@@ -2,6 +2,9 @@ from rest_framework.response import Response
 from rest_framework.generics import RetrieveAPIView
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
+
 
 from .models import User
 from .serializers import UserProfileSerializer
@@ -66,8 +69,16 @@ def user_following(request, username):
 
 @api_view(["POST"])
 def login(request):
-    email = request.data.get("email")
+    username = request.data.get("username")  # ⚠️ usar username
     password = request.data.get("password")
+
+    user = authenticate(username=username, password=password)
+
+    if user is not None:
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({"token": token.key, "username": user.username})
+
+    return Response({"error": "Credenciais inválidas"}, status=401)
 
 
 @api_view(["POST"])

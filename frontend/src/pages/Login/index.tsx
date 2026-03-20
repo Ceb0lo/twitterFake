@@ -8,7 +8,7 @@ import { loginSuccess } from '../../store/authSlice'
 import * as S from './styles'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
@@ -22,14 +22,14 @@ const Login = () => {
       setError('')
 
       const response = await login({
-        username: email,
+        username: username,
         password
       }).unwrap()
 
       const token = response.access
 
       localStorage.setItem('token', token)
-      localStorage.setItem('username', response.data?.email || response.username || email)
+      localStorage.setItem('username', response.data?.username || response.username || username)
 
       navigate('/home')
     } catch (err) {
@@ -44,8 +44,8 @@ const Login = () => {
       <S.InputGroup>
         <S.Label>User</S.Label>
         <S.Input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </S.InputGroup>
 
