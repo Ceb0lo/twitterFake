@@ -50,7 +50,7 @@ const Profile = () => {
     setLoading(true)
     const token = localStorage.getItem('token')
 
-    fetch(`http://127.0.0.1:8000/api/users/${username}`, {
+    fetch(`http://cebolo.pythonanywhere.com/api/users/${username}`, {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     })
       .then(res => res.json())
@@ -63,7 +63,7 @@ const Profile = () => {
         setProfileUser(null)
       })
 
-    fetch(`http://127.0.0.1:8000/api/users/${username}/posts/`, {
+    fetch(`http://cebolo.pythonanywhere.com/api/users/${username}/posts/`, {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     })
       .then(res => res.json())
@@ -85,7 +85,7 @@ const Profile = () => {
     if (!token || !profileUser) return
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/social/follow/toggle/', {
+      const res = await fetch('http://cebolo.pythonanywhere.com/api/social/follow/toggle/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

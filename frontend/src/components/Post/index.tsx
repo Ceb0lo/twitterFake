@@ -55,7 +55,7 @@ const Post = ({
       return
     }
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/likes/toggle/', {
+      const response = await fetch('http://cebolo.pythonanywhere.com/api/likes/toggle/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ const Post = ({
     if (!newComment.trim()) return
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/comments/', {
+      const res = await fetch('http://cebolo.pythonanywhere.com/api/comments/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const Post = ({
   const loadComments = async () => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/comments/?post_id=${id}`
+        `http://cebolo.pythonanywhere.com/api/comments/?post_id=${id}`
       )
       const data: Comment[] = await res.json()
       setCommentsList(data)

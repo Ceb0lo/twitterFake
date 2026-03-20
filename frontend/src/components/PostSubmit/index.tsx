@@ -25,16 +25,19 @@ const PostSubmit = ({ onPostCreated }: PostSubmitProps) => {
     if (!text.trim()) return
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/posts/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          text
-        })
-      })
+      const response = await fetch(
+        'http://cebolo.pythonanywhere.com/api/posts/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            text
+          })
+        }
+      )
 
       const data = await response.json()
 
