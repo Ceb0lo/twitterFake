@@ -41,3 +41,25 @@ export const Input = styled.input`
     color: ${variables.blackblur};
   }
 `
+export const ResultsContainer = styled.div`
+  margin-top: 8px;
+  width: 100%;
+  max-width: 320px;
+  color: ${variables.white}
+  background: ${variables.black};
+  border: 1px solid ${variables.white};
+  border-radius: 12px;
+
+  overflow: hidden;
+`
+
+export const ResultItem = styled.div`
+  padding: 10px 16px;
+  cursor: pointer;
+
+  color: ${variables.white};
+
+  span {
+    font-size: 14px;
+  }
+`

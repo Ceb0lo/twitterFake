@@ -47,7 +47,7 @@ export const BioContent = styled.div`
 
 export const Username = styled.h1`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 30px;
   margin-bottom: 8px;
 `
 
@@ -57,11 +57,15 @@ export const BioFooter = styled.div`
 `
 
 export const SocialNetwork = styled.h2`
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 300;
 
   span {
     font-weight: 600;
     margin-right: 4px;
   }
+`
+export const Bio = styled.p`
+  margin-top: 8px;
+  font-size: 18px;
 `
