@@ -20,7 +20,7 @@ SECRET_KEY = "django-insecure-&olr=!sab3=2@h6rd63&9=q&@!cof9b(!)m^-zd5%!7!q(59ub
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["cebolo.pythonanywhere.com"]
 
 INSTALLED_APPS = [
     "corsheaders",
@@ -98,7 +98,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 AUTH_USER_MODEL = "users.User"
 
@@ -122,3 +124,5 @@ CORS_ALLOWED_ORIGINS = [
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
