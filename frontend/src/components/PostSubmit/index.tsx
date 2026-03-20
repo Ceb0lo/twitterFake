@@ -55,8 +55,6 @@ const PostSubmit = ({ onPostCreated }: PostSubmitProps) => {
 
   return (
     <S.Post>
-      <S.ProfilePicture />
-
       <S.PostContent>
         <S.Text
           ref={textareaRef}

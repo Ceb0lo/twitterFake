@@ -16,11 +16,6 @@ export const PostContent = styled.div`
   flex: 1;
   flex-direction: column;
 `
-export const ProfilePicture = styled.img`
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-`
 export const Text = styled.textarea`
   width: 100%;
   border: none;
