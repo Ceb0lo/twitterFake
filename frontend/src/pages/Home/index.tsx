@@ -30,16 +30,17 @@ const Home = () => {
 
     try {
       const res = await fetch(
-        'http://cebolo.pythonanywhere.com/api/posts/feed/',
+        'https://cebolo.pythonanywhere.com/api/posts/feed/',
         {
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Token ${token}`
           }
         }
       )
 
       const data = await res.json()
       setPosts(data)
+      console.log(data)
     } catch (err) {
       console.error(err)
     }

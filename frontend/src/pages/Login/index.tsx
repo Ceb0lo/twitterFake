@@ -22,14 +22,14 @@ const Login = () => {
       setError('')
 
       const response = await login({
-        username: username,
+        username,
         password
       }).unwrap()
 
-      const token = response.access
+      const token = response.token
 
       localStorage.setItem('token', token)
-      localStorage.setItem('username', response.data?.username || response.username || username)
+      localStorage.setItem('username', response.username)
 
       navigate('/home')
     } catch (err) {

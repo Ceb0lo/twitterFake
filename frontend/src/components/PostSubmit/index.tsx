@@ -31,10 +31,10 @@ const PostSubmit = ({ onPostCreated }: PostSubmitProps) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Token ${token}`
           },
           body: JSON.stringify({
-            text
+            content: text
           })
         }
       )
