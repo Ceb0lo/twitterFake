@@ -42,12 +42,8 @@ const Bio = ({
           </S.Icon>
         )}
       </S.BioHeder>
-
       <S.BioContent>
         <S.Username>{username}</S.Username>
-
-        {bio && <p>{bio}</p>}
-
         <S.BioFooter>
           <S.SocialNetwork>
             <span>{following}</span> Seguindo
@@ -57,6 +53,9 @@ const Bio = ({
             <span>{followers}</span> Seguidores
           </S.SocialNetwork>
         </S.BioFooter>
+        <S.Bio>
+          {bio && <p>{bio}</p>}
+        </S.Bio>
       </S.BioContent>
     </S.Container>
   )

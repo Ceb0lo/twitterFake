@@ -7,7 +7,6 @@ export const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 20px;
 
   ul {
@@ -52,7 +51,6 @@ export const UserInfo = styled.div`
   gap: 10px;
   padding: 15px;
   border-top: 1px solid ${variables.white};
-  margin-top: auto;
 `
 
 export const Avatar = styled.img`

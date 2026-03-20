@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BiLike, BiComment } from 'react-icons/bi'
 
 import * as S from './styles'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   id: number
@@ -31,6 +32,7 @@ const Post = ({
 }: Props) => {
   const CommentIcon = BiComment as React.ElementType
   const LikeIcon = BiLike as React.ElementType
+  const navigate = useNavigate()
 
   const [commentsList, setCommentsList] = useState<Comment[]>([])
   const [likeCount, setLikeCount] = useState(likes_count)
@@ -129,7 +131,7 @@ const Post = ({
 
       <S.PostContent>
         <S.PostHeader>
-          <S.Username>{user}</S.Username>
+          <S.Username onClick={() =>{navigate(`/profile/${user}`)}}>{user}</S.Username>
         </S.PostHeader>
 
         <S.Text>{text}</S.Text>
@@ -159,10 +161,10 @@ const Post = ({
               <S.PostButton onClick={handleComment}>Comentar</S.PostButton>
             </S.CommentsContent>
             {commentsList.map((comment) => (
-              <div key={comment.id}>
-                <strong>{comment.user}</strong>
-                <p>{comment.text}</p>
-              </div>
+              <S.Comments key={comment.id}>
+                <S.Username onClick={() =>{navigate(`/profile/${comment.user}`)}}>{comment.user}</S.Username>
+                <S.Text>{comment.text}</S.Text>
+              </S.Comments>
             ))}
           </div>
         )}

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEditProfileMutation } from '../../services/api'
 
+import * as S from './styles'
+
 const EditProfile = () => {
   const navigate = useNavigate()
 
@@ -33,35 +35,36 @@ const EditProfile = () => {
   }
 
   return (
-    <div>
-      <h1>Editar Perfil</h1>
+    <S.Container>
+      <S.Title>Editar Perfil</S.Title>
+      <S.Form>
+        <S.Input
+          value={newUsername}
+          onChange={(e) => setNewUsername(e.target.value)}
+          placeholder="Novo username"
+        />
 
-      <input
-        value={newUsername}
-        onChange={(e) => setNewUsername(e.target.value)}
-        placeholder="Novo username"
-      />
+        <S.TextArea
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          placeholder="Bio"
+        />
 
-      <textarea
-        value={bio}
-        onChange={(e) => setBio(e.target.value)}
-        placeholder="Bio"
-      />
+        <S.Input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Nova senha"
+        />
 
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Nova senha"
-      />
+        <S.FileInput
+          type="file"
+          onChange={(e) => setFoto(e.target.files?.[0] || null)}
+        />
 
-      <input
-        type="file"
-        onChange={(e) => setFoto(e.target.files?.[0] || null)}
-      />
-
-      <button onClick={handleSubmit}>Salvar</button>
-    </div>
+        <S.Button onClick={handleSubmit}>Salvar</S.Button>
+      </S.Form>
+    </S.Container>
   )
 }
 

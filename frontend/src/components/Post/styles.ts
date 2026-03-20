@@ -9,7 +9,6 @@ export const Post = styled.div`
   display: flex;
   padding: 12px 16px;
   gap: 12px;
-  font-size: 16px;
 `
 export const PostContent = styled.form`
   display: flex;
@@ -27,11 +26,13 @@ export const ProfilePicture = styled.img`
   border-radius: 50%;
 `
 export const Username = styled.h1`
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
 `
 export const Text = styled.p`
   margin-top: 2px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 `
 export const PostFooter = styled.div`
@@ -41,6 +42,7 @@ export const PostFooter = styled.div`
   margin-top: 8px;
   span {
     margin-left: 8px;
+    font-size: 18px;
   }
 `
 export const TextComments = styled.input`
@@ -49,7 +51,7 @@ export const TextComments = styled.input`
   outline: none;
   resize: none;
   overflow: hidden;
-  font-size: 20px;
+  font-size: 16px;
   background: transparent;
 
   input::placeholder {
@@ -71,4 +73,7 @@ export const CommentsContent = styled.div`
   gap: 6px;
   padding-top: 16px;
   padding-bottom: 16px;
+`
+export const Comments = styled.div`
+  margin-top: 8px;
 `
