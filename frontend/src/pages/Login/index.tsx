@@ -26,10 +26,11 @@ const Login = () => {
         password
       }).unwrap()
 
-      const token = response.token
+      const token = response.access
 
       localStorage.setItem('token', token)
-      localStorage.setItem('username', response.username)
+      localStorage.setItem('refresh', response.refresh)
+      localStorage.setItem('username', username)
 
       navigate('/home')
     } catch (err) {

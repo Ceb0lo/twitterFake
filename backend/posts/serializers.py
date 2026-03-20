@@ -5,8 +5,11 @@ from .models import Post
 from rest_framework import serializers
 
 
+from rest_framework import serializers
+from .models import Post
+
 class PostSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(source="user.username")
+    user = serializers.CharField(source="user.username", read_only=True)
     foto = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()

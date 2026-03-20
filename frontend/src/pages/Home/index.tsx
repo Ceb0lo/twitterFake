@@ -33,7 +33,7 @@ const Home = () => {
         'https://cebolo.pythonanywhere.com/api/posts/feed/',
         {
           headers: {
-            Authorization: `Token ${token}`
+            Authorization: `Bearer ${token}`
           }
         }
       )
