@@ -61,7 +61,6 @@ vite.svg
 
 # ENVIRONMENT VARIABLES
 
-.env
 .env.*
 !.env.example
 
