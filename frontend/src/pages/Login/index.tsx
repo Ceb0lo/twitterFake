@@ -61,15 +61,11 @@ const Login = () => {
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <S.Button onClick={handleLogin}>
-        Avançar
-      </S.Button>
+      <S.Button onClick={handleLogin}>Avançar</S.Button>
 
       <S.Dividend>Ou</S.Dividend>
 
-      <S.ButtonCreate to="/create-account">
-        Criar sua conta
-      </S.ButtonCreate>
+      <S.ButtonCreate to="/create-account">Criar sua conta</S.ButtonCreate>
     </S.Container>
   )
 }

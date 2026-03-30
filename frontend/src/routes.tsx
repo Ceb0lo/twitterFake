@@ -10,11 +10,11 @@ import EditProfile from './pages/EditProfile'
 
 const Rotas = () => (
   <Routes>
-    <Route path='/' element={<Login />} />
-    <Route path='/create-account' element={<CreateAccount />} />
+    <Route path="/" element={<Login />} />
+    <Route path="/create-account" element={<CreateAccount />} />
     <Route path="/edit-profile/:id" element={<EditProfile />} />
     <Route
-      path='/home'
+      path="/home"
       element={
         <ProtectedRoute>
           <Home />
@@ -23,7 +23,7 @@ const Rotas = () => (
     />
 
     <Route
-      path='/profile/:username'
+      path="/profile/:username"
       element={
         <ProtectedRoute>
           <Profile />

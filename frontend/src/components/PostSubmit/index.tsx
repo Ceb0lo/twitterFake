@@ -26,7 +26,7 @@ const PostSubmit = ({ onPostCreated }: PostSubmitProps) => {
 
     try {
       const response = await fetch(
-        'http://cebolo.pythonanywhere.com/api/posts/',
+        'https://cebolo.pythonanywhere.com/api/posts/',
         {
           method: 'POST',
           headers: {

@@ -55,16 +55,19 @@ const Post = ({
       return
     }
     try {
-      const response = await fetch('http://cebolo.pythonanywhere.com/api/likes/toggle/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          post_id: id
-        })
-      })
+      const response = await fetch(
+        'https://cebolo.pythonanywhere.com/api/likes/toggle/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            post_id: id
+          })
+        }
+      )
 
       const data = await response.json()
 
@@ -92,17 +95,20 @@ const Post = ({
     if (!newComment.trim()) return
 
     try {
-      const res = await fetch('http://cebolo.pythonanywhere.com/api/comments/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          post: id,
-          text: newComment
-        })
-      })
+      const res = await fetch(
+        'https://cebolo.pythonanywhere.com/api/comments/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            post: id,
+            text: newComment
+          })
+        }
+      )
 
       const data: Comment = await res.json()
 
@@ -116,7 +122,7 @@ const Post = ({
   const loadComments = async () => {
     try {
       const res = await fetch(
-        `http://cebolo.pythonanywhere.com/api/comments/?post_id=${id}`
+        `https://cebolo.pythonanywhere.com/api/comments/?post_id=${id}`
       )
       const data: Comment[] = await res.json()
       setCommentsList(data)
@@ -131,7 +137,13 @@ const Post = ({
 
       <S.PostContent>
         <S.PostHeader>
-          <S.Username onClick={() =>{navigate(`/profile/${user}`)}}>{user}</S.Username>
+          <S.Username
+            onClick={() => {
+              navigate(`/profile/${user}`)
+            }}
+          >
+            {user}
+          </S.Username>
         </S.PostHeader>
 
         <S.Text>{text}</S.Text>
@@ -162,7 +174,13 @@ const Post = ({
             </S.CommentsContent>
             {commentsList.map((comment) => (
               <S.Comments key={comment.id}>
-                <S.Username onClick={() =>{navigate(`/profile/${comment.user}`)}}>{comment.user}</S.Username>
+                <S.Username
+                  onClick={() => {
+                    navigate(`/profile/${comment.user}`)
+                  }}
+                >
+                  {comment.user}
+                </S.Username>
                 <S.Text>{comment.text}</S.Text>
               </S.Comments>
             ))}

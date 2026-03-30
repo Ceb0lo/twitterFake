@@ -39,10 +39,10 @@ const Profile = () => {
   const loggedUserId = localStorage.getItem('user_id')
   const loggedUsername = localStorage.getItem('username')
 
-  const isOwnProfile = profileUser ?
-    String(profileUser.id) === String(loggedUserId) ||
-    profileUser.username === loggedUsername :
-    false
+  const isOwnProfile = profileUser
+    ? String(profileUser.id) === String(loggedUserId) ||
+      profileUser.username === loggedUsername
+    : false
 
   useEffect(() => {
     if (!username) return
@@ -50,28 +50,28 @@ const Profile = () => {
     setLoading(true)
     const token = localStorage.getItem('token')
 
-    fetch(`http://cebolo.pythonanywhere.com/api/users/${username}`, {
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+    fetch(`https://cebolo.pythonanywhere.com/api/users/${username}`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {}
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProfileUser(data)
         setIsFollowing(data.is_following)
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Erro ao carregar perfil:', error)
         setProfileUser(null)
       })
 
-    fetch(`http://cebolo.pythonanywhere.com/api/users/${username}/posts/`, {
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+    fetch(`https://cebolo.pythonanywhere.com/api/users/${username}/posts/`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {}
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const userPosts = data.results || data
         setPosts(userPosts)
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Erro ao carregar posts:', error)
         setPosts([])
       })
@@ -85,26 +85,33 @@ const Profile = () => {
     if (!token || !profileUser) return
 
     try {
-      const res = await fetch('http://cebolo.pythonanywhere.com/api/social/follow/toggle/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          user_id: profileUser.id
-        })
-      })
+      const res = await fetch(
+        'https://cebolo.pythonanywhere.com/api/social/follow/toggle/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            user_id: profileUser.id
+          })
+        }
+      )
 
       const data = await res.json()
       setIsFollowing(data.following)
 
-      setProfileUser(prev => prev ? {
-        ...prev,
-        followers: data.following
-          ? prev.followers + 1
-          : prev.followers - 1
-      } : null)
+      setProfileUser((prev) =>
+        prev
+          ? {
+              ...prev,
+              followers: data.following
+                ? prev.followers + 1
+                : prev.followers - 1
+            }
+          : null
+      )
     } catch (err) {
       console.error(err)
     }
